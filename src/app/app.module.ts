@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,15 +7,29 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 // Angular Material packages
 import {MatButtonModule} from '@angular/material/button';
+import { HomeComponent } from './components/home/home.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { NewcontactComponent } from './components/newcontact/newcontact.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    ContactsComponent,
+    NewcontactComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule
   ],
   providers: [
     provideClientHydration(),
