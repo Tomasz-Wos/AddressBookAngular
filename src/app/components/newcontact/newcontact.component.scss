@@ -1,0 +1,28 @@
+.actionButton{
+    margin-right: 20px;
+    width: 100px;
+}
+
+.myInputs{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+#contactCard{
+    min-width: 600px;
+
+}
+
+#mainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 900px){
+    #contactCard{
+        min-width: 400px;
+    
+    }
+}

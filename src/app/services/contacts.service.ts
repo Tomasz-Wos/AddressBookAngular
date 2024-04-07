@@ -17,4 +17,35 @@ export class ContactsService {
   getContacts(){
     return this.contacts
   }
+
+  createContact(newContact: Contact){
+    
+    // Finding highest Id
+    let highestId = 0
+    this.contacts.forEach(contactObject=>{
+      if (contactObject.Id > highestId)
+       highestId = contactObject.Id
+    })
+
+    this.contacts.push({
+      Id: highestId+1,
+      FirstName: newContact.FirstName,
+      LastName: newContact.LastName,
+      PhoneNumber: newContact.PhoneNumber,
+      Address: newContact.Address,
+    })
+  }
+
+  updateContact(updateContact: Contact){
+    const index = this.contacts.findIndex(contact => contact.Id == updateContact.Id )
+    this.contacts[index].FirstName=updateContact.FirstName
+    this.contacts[index].LastName=updateContact.LastName
+    this.contacts[index].PhoneNumber=updateContact.PhoneNumber
+    this.contacts[index].Address=updateContact.Address
+  }
+
+  deleteContact(contactId: number){
+    const index = this.contacts.findIndex(contact => contact.Id == contactId )
+    this.contacts.splice(index, 1)
+  }
 }
