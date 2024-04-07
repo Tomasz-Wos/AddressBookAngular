@@ -1,21 +1,35 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Contact } from '../interfaces/contact';
+import { HttpClient } from '@angular/common/http';
+import { json } from 'stream/consumers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsService {
-
+  private apiUrl = "https://localhost:7067/Contacts/"
+  private http = inject(HttpClient)
+  
   contacts: Contact[] = [
-    {Id: 1, FirstName: 'John', LastName: 'Johnson', PhoneNumber: '111-111-1111', Address: '111 Main St, Minneapolis, MN 55001'},
-    {Id: 2, FirstName: 'Jack', LastName: 'Jackson', PhoneNumber: '222-222-2222', Address: '222 Main St, Minneapolis, MN 55001'},
-    {Id: 3, FirstName: 'Mary', LastName: 'Erickson', PhoneNumber: '333-333-3333', Address: '333 Main St, Minneapolis, MN 55001'}
+    {id: 1, firstName: 'John', lastName: 'Johnson', phoneNumber: '111-111-1111', address: '111 Main St, Minneapolis, MN 55001'},
+    {id: 2, firstName: 'Jack', lastName: 'Jackson', phoneNumber: '222-222-2222', address: '222 Main St, Minneapolis, MN 55001'},
+    {id: 3, firstName: 'Mary', lastName: 'Erickson', phoneNumber: '333-333-3333', address: '333 Main St, Minneapolis, MN 55001'}
   ]
+
+  APIContacts!: any
 
   constructor() { }
 
   getContacts(){
-    return this.contacts
+    // return this.contacts
+    const url = this.apiUrl + 'AllContacts'
+    
+      this.http.get(url).subscribe({
+        next: value => this.APIContacts = value,
+        error: err => console.error('Observable emitted an error: ' + err),
+        complete: () => console.log('Observable emitted the complete notification')
+      })
+      return this.APIContacts
   }
 
   createContact(newContact: Contact){
@@ -23,29 +37,29 @@ export class ContactsService {
     // Finding highest Id
     let highestId = 0
     this.contacts.forEach(contactObject=>{
-      if (contactObject.Id > highestId)
-       highestId = contactObject.Id
+      if (contactObject.id > highestId)
+       highestId = contactObject.id
     })
 
     this.contacts.push({
-      Id: highestId+1,
-      FirstName: newContact.FirstName,
-      LastName: newContact.LastName,
-      PhoneNumber: newContact.PhoneNumber,
-      Address: newContact.Address,
+      id: highestId+1,
+      firstName: newContact.firstName,
+      lastName: newContact.lastName,
+      phoneNumber: newContact.phoneNumber,
+      address: newContact.address,
     })
   }
 
   updateContact(updateContact: Contact){
-    const index = this.contacts.findIndex(contact => contact.Id == updateContact.Id )
-    this.contacts[index].FirstName=updateContact.FirstName
-    this.contacts[index].LastName=updateContact.LastName
-    this.contacts[index].PhoneNumber=updateContact.PhoneNumber
-    this.contacts[index].Address=updateContact.Address
+    const index = this.contacts.findIndex(contact => contact.id == updateContact.id )
+    this.contacts[index].firstName=updateContact.firstName
+    this.contacts[index].lastName=updateContact.lastName
+    this.contacts[index].phoneNumber=updateContact.phoneNumber
+    this.contacts[index].address=updateContact.address
   }
 
   deleteContact(contactId: number){
-    const index = this.contacts.findIndex(contact => contact.Id == contactId )
+    const index = this.contacts.findIndex(contact => contact.id == contactId )
     this.contacts.splice(index, 1)
   }
 }

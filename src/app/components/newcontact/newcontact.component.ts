@@ -26,11 +26,11 @@ constructor(private router: Router, private contactsService: ContactsService){
 
   onSubmit() {
     this.newContact = {
-      Id:0,
-      FirstName: this.contactForm.controls['firstName'].value as string,
-      LastName: this.contactForm.controls['lastName'].value as string,
-      PhoneNumber: this.contactForm.controls['phoneNumber'].value as string,
-      Address: this.contactForm.controls['address'].value as string,
+      id:0,
+      firstName: this.contactForm.controls['firstName'].value as string,
+      lastName: this.contactForm.controls['lastName'].value as string,
+      phoneNumber: this.contactForm.controls['phoneNumber'].value as string,
+      address: this.contactForm.controls['address'].value as string,
     }
     this.contactsService.createContact(this.newContact)
     console.log(this.contactsService.getContacts())

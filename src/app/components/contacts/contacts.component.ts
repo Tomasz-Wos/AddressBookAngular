@@ -1,10 +1,12 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Contact } from '../../interfaces/contact';
 import { ContactsService } from './../../services/contacts.service';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UpdateDialogComponent } from '../../dialogs/update-dialog/update-dialog.component';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog/delete-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contacts',
@@ -12,22 +14,23 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './contacts.component.scss'
 })
 export class ContactsComponent {
-
+  private route = inject(ActivatedRoute)
+  protected id!: string
+  private contactsService = inject(ContactsService)
 
   contactsDataArray: Contact[] = []
   dataSource = new MatTableDataSource<Contact>()
 
   columnsToDisplay = ['FirstName', 'LastName', 'PhoneNumber', 'Address', 'Update', 'Delete'];
 
-  constructor(private contactsService: ContactsService, private dialog: MatDialog){
-
+  constructor(private dialog: MatDialog){
   }
 
   ngOnInit(): void {
-    this.contactsDataArray = this.contactsService.getContacts()
+    this.contactsDataArray= this.contactsService.getContacts()
     this.dataSource = new MatTableDataSource<Contact>(this.contactsDataArray)
-    console.log(this.contactsDataArray)
   }
+
   onUpdate(contact: Contact) {
     let dialogRef = this.dialog.open(UpdateDialogComponent, {
       height: '500px',

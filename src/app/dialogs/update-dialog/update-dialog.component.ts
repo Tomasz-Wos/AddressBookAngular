@@ -27,19 +27,20 @@ export class UpdateDialogComponent {
 
   ngOnInit(): void {
     console.log(this.contactToUpdate)
-    this.updateForm.controls['firstName'].setValue(this.contactToUpdate.FirstName)
-    this.updateForm.controls['lastName'].setValue(this.contactToUpdate.LastName)
-    this.updateForm.controls['phoneNumber'].setValue(this.contactToUpdate.PhoneNumber)
-    this.updateForm.controls['address'].setValue(this.contactToUpdate.Address)
+    debugger
+    this.updateForm.controls['firstName'].setValue(this.contactToUpdate.firstName)
+    this.updateForm.controls['lastName'].setValue(this.contactToUpdate.lastName)
+    this.updateForm.controls['phoneNumber'].setValue(this.contactToUpdate.phoneNumber)
+    this.updateForm.controls['address'].setValue(this.contactToUpdate.address)
   }
   
   onSubmit(){
     this.updateContact = {
-      Id: this.contactToUpdate.Id,
-      FirstName: this.updateForm.controls['firstName'].value as string,
-      LastName: this.updateForm.controls['lastName'].value as string,
-      PhoneNumber: this.updateForm.controls['phoneNumber'].value as string,
-      Address: this.updateForm.controls['address'].value as string,
+      id: this.contactToUpdate.id,
+      firstName: this.updateForm.controls['firstName'].value as string,
+      lastName: this.updateForm.controls['lastName'].value as string,
+      phoneNumber: this.updateForm.controls['phoneNumber'].value as string,
+      address: this.updateForm.controls['address'].value as string,
     }
     this.contactService.updateContact(this.updateContact)
     console.log(this.contactService.getContacts())

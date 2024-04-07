@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UpdateDialogComponent } from './dialogs/update-dialog/update-dialog.component';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -43,7 +44,8 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
     MatTableModule,
     MatCardModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),

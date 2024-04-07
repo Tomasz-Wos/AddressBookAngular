@@ -25,14 +25,14 @@ export class DeleteDialogComponent {
   }
 
   ngOnInit(): void {
-    this.deleteForm.controls['firstName'].setValue(this.contactToDelete.FirstName)
-    this.deleteForm.controls['lastName'].setValue(this.contactToDelete.LastName)
-    this.deleteForm.controls['phoneNumber'].setValue(this.contactToDelete.PhoneNumber)
-    this.deleteForm.controls['address'].setValue(this.contactToDelete.Address)
+    this.deleteForm.controls['firstName'].setValue(this.contactToDelete.firstName)
+    this.deleteForm.controls['lastName'].setValue(this.contactToDelete.lastName)
+    this.deleteForm.controls['phoneNumber'].setValue(this.contactToDelete.phoneNumber)
+    this.deleteForm.controls['address'].setValue(this.contactToDelete.address)
   }
 
   onSubmit(){
-    let contactId = this.contactToDelete.Id
+    let contactId = this.contactToDelete.id
     this.contactService.deleteContact(contactId)
     console.log(this.contactService.getContacts())
     this.dialogRef.close()
